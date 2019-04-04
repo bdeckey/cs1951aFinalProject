@@ -33,9 +33,9 @@ with open('redditFinal.json') as f:
     data = json.load(f)
 
 
-days = []
-newData = {}
-
+# days = []
+# newData = {}
+#
 # sentences = ["suck my dick you wonderful person.", "i love you cunt!",
 #              "dirty filthy arab", "fuck you michael", "i love penis, but hate vagina",
 #              "suck my dick you wonderful cunt", "suck my dick", ""]
@@ -83,6 +83,7 @@ for day in data:
     data[day]['num_neg'] = neg
     data[day]['num_neut']  = nut
     data[day]['submissions'] = newSubList
-#
-# with open(dirname(realpath(__file__)) + '/redditFinal.json', 'w') as outfile:
-#     json.dump(data, outfile, indent=4)
+# #
+with open(dirname(realpath(__file__)) + '/redditFinal.json', 'w') as outfile:
+    json.dump(data, outfile, indent=4)
+

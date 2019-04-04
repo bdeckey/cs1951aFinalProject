@@ -69,7 +69,7 @@ def collectData(year, month, day):
 
 
 
-startYear = 2013
+startYear = 2018
 data = {}
 for year in range(startYear, 2019):
     print(year)
@@ -88,5 +88,5 @@ for year in range(startYear, 2019):
                 date = str(month) + '-' + str(day) + '-' + str(year)
                 data[date] = collectData(year, month, day)
 
-with open(dirname(realpath(__file__)) + '/reddit.json', 'w') as outfile:
+with open(dirname(realpath(__file__)) + '/redditTest.json', 'w') as outfile:
     json.dump(data, outfile, indent=4)
