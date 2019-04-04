@@ -31,18 +31,30 @@ def getDayAfter(year, month, day):
         else:
             return (year, month+1, 1)
 
+keywords = ['crypto', 'bitcoin', 'cryptocurrency', 'blockchain', 'satoshi']
+
+def combineKeywords(keywords):
+    result = ''
+    for i in range(len(keywords)):
+        result += keywords[i]
+        if (i is not len(keywords) - 1):
+            result += '|'
+    return result
+
 def collectData(year, month, day):
     nextDay = getDayAfter(year, month, day)
     after = datetime.datetime(year, month, day, 0).timestamp()
     before = datetime.datetime(nextDay[0], nextDay[1], nextDay[2], 0).timestamp()
-    newUrl = urllib.parse.urlencode({'q': 'cryptocurrency', 'after': str(int(after)), 'before': str(int(before)), 'size': str(500)})
+    search = combineKeywords(keywords)
+    newUrl = urllib.parse.urlencode({'q': search, 'after': str(int(after)), 'before': str(int(before)), 'size': str(500)})
     res = requests.get(api + newUrl + "&score=>10")
-    print(year, month, day)
+    # print(year, month, day)
     result = []
     if res.ok:
         data = json.loads(res.content)
         numSubmissions = len(data['data'])
-        print("the number of results: ", len(data['data']))
+        # print("the number of results: ", len(data['data']))
+        # print(data)
         for item in data['data']:
             title = item['title']
             score = item['score']
@@ -55,10 +67,14 @@ def collectData(year, month, day):
 
 
 
+
+
 startYear = 2013
 data = {}
 for year in range(startYear, 2019):
+    print(year)
     for month in range(1, 13):
+        print(month)
         if (month == 1 or month == 3 or month == 5 or month == 7 or month == 8 or month == 10 or month == 12):
             for day in range(1, 32):
                 date = str(month) + '-' + str(day) + '-' + str(year)
